@@ -322,6 +322,21 @@ export default class ImagesUploader extends Component {
 						if (onLoadEnd && typeof onLoadEnd === 'function') {
 							onLoadEnd(false, response);
 						}
+					} else if (response instanceof Object) {
+						let imagePreviewUrls = [];
+						if (multiple === false) {
+							imagePreviewUrls = response instanceof Array ? response.url : [response.url];
+						} else {
+							imagePreviewUrls = this.state.imagePreviewUrls.concat(response.url);
+						}
+						this.setState({
+							imagePreviewUrls,
+							optimisticPreviews: [],
+							loadState: 'success',
+						});
+						if (onLoadEnd && typeof onLoadEnd === 'function') {
+							onLoadEnd(false, response);
+						}
 					} else {
 						const err = {
 							message: 'invalid response type',
