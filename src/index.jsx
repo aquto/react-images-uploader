@@ -296,7 +296,7 @@ export default class ImagesUploader extends Component {
 				const imageFormData = new FormData();
 
 				for (let i = 0; i < files.length; i++) {
-					imageFormData.append('imageFiles', files[i], files[i].name);
+					imageFormData.append('file', files[i], files[i].name);
 				}
 
 				let response = await fetch(url, {
