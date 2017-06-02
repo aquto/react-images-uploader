@@ -731,7 +731,7 @@ export default class ImagesUploader extends Component {
 							this.input = ref;
 						}}
 						type="file"
-						accept="image/*"
+						accept={this.props.acceptInput}
 						multiple={multiple === false ? false : 'multiple'}
 						disabled={disabled || loadState === 'loading'}
 						onChange={this.handleImageChange}
