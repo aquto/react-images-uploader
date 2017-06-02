@@ -75,6 +75,7 @@ export default class ImagesUploader extends Component {
 			filesInputContainer: PropTypes.object,
 			notification: PropTypes.object,
 		}),
+		acceptInput: PropTypes.string
 	}
 
 	static defaultProps = {
@@ -88,6 +89,7 @@ export default class ImagesUploader extends Component {
 		notificationBgColor: 'rgba(0, 0, 0, 0.3)',
 		notificationColor: '#fafafa',
 		classNamespace: 'iu-',
+		acceptInput: 'image/*'
 	};
 
 	constructor(props: Object) {
@@ -428,20 +430,20 @@ export default class ImagesUploader extends Component {
 				reader.readAsDataURL(file);
 			}
 
-			if (!file.type.match('image.*')) {
-				const err = {
-					message: 'file type error',
-					type: file.type,
-					fileName: 'ImagesUploader',
-				};
-				if (onLoadEnd && typeof onLoadEnd === 'function') {
-					onLoadEnd(err);
-				}
-				this.setState({
-					loadState: 'error',
-				});
-				return;
-			}
+			// if (!file.type.match('image.*')) {
+			// 	const err = {
+			// 		message: 'file type error',
+			// 		type: file.type,
+			// 		fileName: 'ImagesUploader',
+			// 	};
+			// 	if (onLoadEnd && typeof onLoadEnd === 'function') {
+			// 		onLoadEnd(err);
+			// 	}
+			// 	this.setState({
+			// 		loadState: 'error',
+			// 	});
+			// 	return;
+			// }
 		}
 
 		if (url) {
@@ -687,7 +689,7 @@ export default class ImagesUploader extends Component {
 						<Dropzone
 							onDrop={this.handleFileDrop}
 							disableClick
-							accept="image/*"
+							accept={this.props.acceptInput}
 							className={classNames.dropzone || `${classNamespace}dropzone`}
 							style={dropzoneStyle}
 							multiple={
